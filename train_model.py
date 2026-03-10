@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
-from huggingface_hub import HfApi, HfFolder, create_repo, upload_file
+from huggingface_hub import HfApi, create_repo, upload_file
 
 from sklearn.linear_model import LogisticRegression
 
@@ -29,7 +29,6 @@ def upload_to_hf(local_model_path: str, hf_repo_id: str, hf_token: str):
         raise ValueError("HF_TOKEN is not set. Cannot upload to Hugging Face.")
 
     api = HfApi()
-    HfFolder.save_token(hf_token)
 
     # Create the repo if it doesn't exist (under your user or org)
     create_repo(repo_id=hf_repo_id, token=hf_token, private=False, exist_ok=True)
